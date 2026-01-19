@@ -3,6 +3,8 @@ Product Architecture is where business intent becomes a system, before it become
 
 **Product Architect** ([productarchitect.io](https://productarchitect.io)) - A suite of tools for operationalizing Product Architecture [Coming Soon]
 
+**Product Architecture** ([productarchitecture.io](https://productarchitecture.io)) - Thought leadership around Product Architecture [Coming Soon]
+
 ## Table of Contents
 
 - [Key Concepts](#key-concepts)
