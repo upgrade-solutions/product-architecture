@@ -1,6 +1,15 @@
 # Product Architecture
 Product Architecture is where business intent becomes a system, before it becomes software. It is the discipline of defining a product's structure, behavior, and constraints so it can be intentionally designed, consistently delivered, and safely evolved as a system.
 
+## Table of Contents
+
+- [Key Concepts](#key-concepts)
+  - [Structure](#structure)
+  - [Operations](#operations)
+  - [Behavior](#behavior)
+    - [States and Transitions](#states-and-transitions)
+  - [Constraints](#constraints)
+
 ## Key Concepts
 
 ### Structure
