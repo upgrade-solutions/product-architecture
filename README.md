@@ -11,6 +11,7 @@ Product Architecture is where business intent becomes a system, before it become
   - [Behavior](#behavior)
     - [States and Transitions](#states-and-transitions)
   - [Constraints](#constraints)
+- [Related Concepts](#related-concepts)
 
 ## Key Concepts
 
@@ -131,3 +132,9 @@ States represent the condition of a resource at a point in time, while transitio
 ### Constraints
 
 *(To be defined)*
+
+## Related Concepts
+
+* **Product Pipeline** - Applying Product Architecture to Product Management, wherein the software development lifecycle becomes a set of resources, states, and transitions (e.g., Ideas become Projects/Epics, which are described in Stories/Tasks, where dev work is done, deployed and released)
+* **Product DNA** - A Product Definition Language (JSON) for describing Product Architecture
+* **Digital DNA** - A broader concept that applies to business operations in general (not just software products)
