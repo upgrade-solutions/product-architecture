@@ -120,6 +120,80 @@ In this model:
 - **Operations** (on arrows) are the actions taken: `submit`, `approve`, `fund`
 - **Terminal states** mark the end of the lifecycle: `[rejected]`, `[paid-off]`, `[charged-off]`
 
+**XState Configuration:**
+
+```json
+{
+  "id": "loan",
+  "initial": "draft",
+  "states": {
+    "draft": {
+      "on": {
+        "SUBMIT": "submitted"
+      }
+    },
+    "submitted": {
+      "on": {
+        "VERIFY": "verified"
+      }
+    },
+    "verified": {
+      "on": {
+        "UNDERWRITE": "underwritten"
+      }
+    },
+    "underwritten": {
+      "on": {
+        "APPROVE": "approved",
+        "REJECT": "rejected"
+      }
+    },
+    "approved": {
+      "on": {
+        "CLOSE": "closed",
+        "FUND": "funded"
+      }
+    },
+    "rejected": {
+      "type": "final"
+    },
+    "closed": {
+      "on": {
+        "FUND": "funded"
+      }
+    },
+    "funded": {
+      "on": {
+        "SERVICE": "servicing",
+        "MODIFY": "modified",
+        "DEFAULT": "defaulted"
+      }
+    },
+    "servicing": {
+      "on": {
+        "PAYOFF": "paid_off"
+      }
+    },
+    "modified": {
+      "on": {
+        "DEFAULT": "defaulted"
+      }
+    },
+    "defaulted": {
+      "on": {
+        "CHARGE_OFF": "charged_off"
+      }
+    },
+    "paid_off": {
+      "type": "final"
+    },
+    "charged_off": {
+      "type": "final"
+    }
+  }
+}
+```
+
 ### Constraints
 
 *(To be defined)*
