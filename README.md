@@ -37,13 +37,17 @@ This hierarchy shows how:
 
 **Note:** What matters is a hierarchical definition and boundaries, not specifically the terms used at each hierarchical level. 
 
-### Behavior
+### Operations
 
-Interactions within the system that describe how the system behaves. This involves the flow of operations and state transitions throughout the product lifecycle.
+Operations bridge the gap between what the system *is* (Structure) and what it *does* (Behavior). They are:
+- **Scoped by Structure** - Operations belong to specific domains, modules, and contexts within the structural hierarchy, enforcing boundaries and ownership
+- **Express Behavior** - Operations define the actions and state transitions that drive the system's lifecycle and workflows
+- **Enable Controls** - Operations serve as the attachment point for cross-cutting concerns like permissions, feature flags, audit logs, and business rules
+- **Create Vocabulary** - Operations establish a shared language between business stakeholders and technical teams
+
+By organizing operations within the structural hierarchy using the pattern `[domain]:[resource]:[action]`, we create a clear mapping between business capabilities (structure) and business processes (behavior).
 
 **Example:** The lifecycle of a Loan
-
-Operations are organized by domain context using the pattern `[domain]:[entity]:[operation]`.
 
 **Loan Origination** - Creating and approving new loans:
 - `loan-origination:loan:draft` - Initial creation and data gathering
@@ -61,6 +65,51 @@ Operations are organized by domain context using the pattern `[domain]:[entity]:
 - `loan-servicing:loan:default` - Payment obligations not met
 - `loan-servicing:loan:payoff` - Loan is fully repaid (terminal state)
 - `loan-servicing:loan:charge-off` - Loan written off as loss (terminal state)
+
+### Behavior
+
+Interactions within the system that describe how the system behaves. This involves the flow of operations and state transitions throughout the product lifecycle.
+
+#### States and Transitions
+
+States represent the condition of a resource at a point in time, while transitions define how resources move from one state to another. States and transitions are intrinsically linked to Operations:
+
+- **Operations trigger transitions** - When an operation executes, it moves a resource from one state to another
+- **Completed operations yield states** - A successful operation produces a new state, represented as a resource with a past-tense action (e.g., `loan:submitted`, `loan:approved`, `loan:funded`)
+- **States enable or restrict operations** - The current state determines which operations are valid (e.g., you can't `loan:fund` until the loan is in the `loan:approved` state)
+- **Transitions create history** - Each state transition forms an audit trail of how the resource evolved over time
+
+**Example:** Loan State Transitions
+
+```
+[draft] --submit--> [submitted] --verify--> [verified] --underwrite--> [underwritten]
+                                                                              |
+                                                                         approve/reject
+                                                                              |
+                                                           +-----------------+-----------------+
+                                                           |                                   |
+                                                       [approved] --close--> [closed]      [rejected]
+                                                           |                     |              (terminal)
+                                                         fund                  fund
+                                                           |                     |
+                                                       [funded] <---------------+
+                                                           |
+                                              +------------+-------------+
+                                              |            |             |
+                                          service      modify       default
+                                              |            |             |
+                                        [servicing] [modified] --> [defaulted]
+                                              |                          |
+                                           payoff                   charge-off
+                                              |                          |
+                                         [paid-off]              [charged-off]
+                                         (terminal)               (terminal)
+```
+
+In this model:
+- **States** (in brackets) represent the resource condition: `[submitted]`, `[approved]`, `[funded]`
+- **Operations** (on arrows) are the actions taken: `submit`, `approve`, `fund`
+- **Terminal states** mark the end of the lifecycle: `[rejected]`, `[paid-off]`, `[charged-off]`
 
 ### Constraints
 
