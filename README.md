@@ -1,6 +1,8 @@
 # Product Architecture
 Product Architecture is where business intent becomes a system, before it becomes software. It is the discipline of defining a product's structure, behavior, and constraints so it can be intentionally designed, consistently delivered, and safely evolved as a system.
 
+**Product Architect** ([productarchitect.io](https://productarchitect.io)) - A suite of tools for operationalizing Product Architecture [Coming Soon]
+
 ## Table of Contents
 
 - [Key Concepts](#key-concepts)
@@ -136,5 +138,4 @@ States represent the condition of a resource at a point in time, while transitio
 ## Related Concepts
 
 * **Product Pipeline** - Applying Product Architecture to Product Management, wherein the software development lifecycle becomes a set of resources, states, and transitions (e.g., Ideas become Projects/Epics, which are described in Stories/Tasks, where dev work is done, deployed and released)
-* **Product DNA** - A Product Definition Language (JSON) for describing Product Architecture
-* **Digital DNA** - A broader concept that applies to business operations in general (not just software products)
+* **Product DNA** - [DNA](https://github.com/upgrade-solutions/dna) is Product Definition Language (JSON) for describing Product Architecture. **Digital DNA** is a broader concept that applies to business operations in general (not just software products)
